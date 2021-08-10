@@ -1,28 +1,37 @@
 <template>
-  <div class="container" :style="{ height: arenaHeight + 'px' }">
-    <div class="score">Score: {{ score }}</div>
 
-    <div
-      tabindex="0"
-      class="arena"
-      :style="{ height: height + 'px', width: width + 'px' }"
-      @keydown="keyPressHandler($event)"
-    >
-      <Snake
-        v-for="snakePosition in snakePositionArray"
-        :key="snakePosition['margin-top'] + '_' + snakePosition['margin-left']"
-        :positionProps="snakePosition"
+  <div>
+
+    <CountDown v-if="showCountDown" @zeroCounter="closeCountDown"></CountDown>
+
+    <div v-if="!showCountDown" class="container" :style="{ height: arenaHeight + 'px' }">
+      <div class="score">Score: {{ score }}</div>
+
+      
+      <div
+        tabindex="0"
+        class="arena"
+        :style="{ height: height + 'px', width: width + 'px' }"
+        @keydown="keyPressHandler($event)"
       >
-      </Snake>
+        <Snake
+          v-for="snakePosition in snakePositionArray"
+          :key="snakePosition['margin-top'] + '_' + snakePosition['margin-left']"
+          :positionProps="snakePosition"
+        >
+        </Snake>
 
-      <Food :positionProps="foodPosition" :foodSizeProps="foodSize"> </Food>
+        <Food :positionProps="foodPosition" :foodSizeProps="foodSize"> </Food>
+      </div>
     </div>
+
   </div>
 </template>
 
 <script>
 import Snake from "./Snake";
 import Food from "./Food";
+import CountDown from "./CountDown";
 
 import { insidePoly } from "./Utils";
 
@@ -30,13 +39,13 @@ export default {
   components: {
     Snake,
     Food,
+    CountDown,
   },
 
   created: function () {
-
     //Enable window resize
     window.addEventListener("resize", this.windowSize);
-  
+
     //Create random food
     this.createRandomFood();
 
@@ -75,6 +84,7 @@ export default {
       foodSize: 15, //Food dimensio
       foodPosition: null,
       score: 0,
+      showCountDown: true,
     };
   },
 
@@ -277,6 +287,11 @@ export default {
           Math.floor(Math.random() * (this.width - 2 * this.foodSize)) +
           this.foodSize,
       };
+    },
+
+    closeCountDown() {
+      debugger;
+      this.showCountDown = false;
     },
   },
 };
