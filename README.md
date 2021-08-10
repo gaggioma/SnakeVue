@@ -1,4 +1,4 @@
-# Snake VueJs
+# Snake Vue.js
 
 ## Project target :dart:
 The main purpose of this project is to try the front end library [Vue.js](https://vuejs.org/v2/guide/) in a dynamic web application.
