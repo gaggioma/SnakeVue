@@ -4,7 +4,7 @@
 The main purpose of this project is to try the front end library [Vue.js](https://vuejs.org/v2/guide/) in a dynamic web application.
 I thouth that a simple example that best fit this purpose colud be the old [Snake](https://en.wikipedia.org/wiki/Snake_(video_game_genre)) video game.
 
-## Result :video_game:
+## Result :video_game: 
 
 
 ## Project setup
