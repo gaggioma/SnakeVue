@@ -30,9 +30,6 @@ export default {
 </script>
 
 <style>
-.elementToFadeInAndOut {
-  
-}
 
 .containerCounter{
   display: flex;
