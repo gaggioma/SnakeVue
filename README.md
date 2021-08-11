@@ -6,7 +6,7 @@ I thouth that a simple example that best fit this purpose colud be the old [Snak
 
 ## Project structure
 Components:
-- Arena: this component play the role of HOC. Areana controls all positions of snake, food and bounding check;
+- Arena: this component play the role of HOC. Arena controls all positions of snake, food and executes bounding check;
 
 - CountDown: this component executes countdown before game start;
 
@@ -36,6 +36,3 @@ yarn build
 ```
 yarn lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
