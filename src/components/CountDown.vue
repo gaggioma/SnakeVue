@@ -1,9 +1,11 @@
 <template>
-    <div :key="counter" class="containerCounter">
-        <h1>
-            {{ counter }}
-        </h1>
+  <div :key="counter" class="containerCounter">
+    <div class="counter">
+      <h1 >
+        {{ counter }}
+      </h1>
     </div>
+  </div>
 </template>
 
 <script>
@@ -30,20 +32,27 @@ export default {
 </script>
 
 <style>
-
-.containerCounter{
+.containerCounter {
   display: flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
-  margin-left: 43%;
-  margin-top: 10%;
+  position: fixed;
+  /*margin-left: 35%;
+  margin-top: 10%;*/
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+}
+
+.counter{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 200px;
   height: 200px;
   background: darkturquoise;
-  animation: fadeinout 2s linear forwards;
-  z-index: 1;
   border-radius: 200px;
+  animation: fadeinout 2s linear forwards;
 }
 
 @keyframes fadeinout {

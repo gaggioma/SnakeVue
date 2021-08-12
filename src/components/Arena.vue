@@ -1,13 +1,18 @@
 <template>
-
   <div>
-
     <CountDown v-if="showCountDown" @zeroCounter="closeCountDown"></CountDown>
 
-    <div v-if="!showCountDown" class="container" :style="{ height: arenaHeight + 'px' }">
-      <div class="score">Score: {{ score }}</div>
+    <LevelComplete v-if="showLevelComplete"
+    :time="timeCounter"
+    ></LevelComplete>
 
-      
+    <div
+      v-if="!showCountDown"
+      class="container"
+      :style="{ height: arenaHeight + 'px' }"
+    >
+      <div class="score" :key="score">Score: {{ score }} in {{timeCounter}} ms</div>
+
       <div
         tabindex="0"
         class="arena"
@@ -16,7 +21,9 @@
       >
         <Snake
           v-for="snakePosition in snakePositionArray"
-          :key="snakePosition['margin-top'] + '_' + snakePosition['margin-left']"
+          :key="
+            snakePosition['margin-top'] + '_' + snakePosition['margin-left']
+          "
           :positionProps="snakePosition"
         >
         </Snake>
@@ -24,7 +31,6 @@
         <Food :positionProps="foodPosition" :foodSizeProps="foodSize"> </Food>
       </div>
     </div>
-
   </div>
 </template>
 
@@ -32,6 +38,7 @@
 import Snake from "./Snake";
 import Food from "./Food";
 import CountDown from "./CountDown";
+import LevelComplete from "./LevelComplete";
 
 import { insidePoly } from "./Utils";
 
@@ -40,6 +47,7 @@ export default {
     Snake,
     Food,
     CountDown,
+    LevelComplete,
   },
 
   created: function () {
@@ -51,7 +59,7 @@ export default {
 
     //Update snake position every updateTime ms
     var updateTime = 80;
-    setInterval(() => this.updateSnake(), updateTime);
+    this.interval = setInterval(() => this.updateSnake(), updateTime);
   },
 
   data: function () {
@@ -71,6 +79,7 @@ export default {
     }
 
     return {
+      interval: null,
       directionKey: "up",
       snakePositionArray: arrayTmp,
       direction: {
@@ -85,6 +94,9 @@ export default {
       foodPosition: null,
       score: 0,
       showCountDown: true,
+      showLevelComplete: false,
+      initTimeCounter: new Date().getTime(),
+      timeCounter: 0
     };
   },
 
@@ -173,6 +185,13 @@ export default {
         }
       }
     },
+
+    score() {
+      if (this.score === 5) {
+        clearInterval(this.interval);
+        this.showLevelComplete = true;
+      }
+    },
   },
 
   methods: {
@@ -229,6 +248,11 @@ export default {
         top: top,
         left: left,
       };
+
+      //Increase time counter
+      var now = new Date().getTime();
+      this.timeCounter = now - this.initTimeCounter;
+      // = Math.floor((t % (1000 * 60)) / 1000) ;
     },
 
     //Key press handler
@@ -304,9 +328,20 @@ export default {
 }
 
 .score {
-  font-size: 20px;
+  font-size: 25px;
+  margin-top: 10px;
   margin-bottom: 10px;
-  color: white;
+  color: rgb(248, 244, 7);
+  animation: fadein 1s linear forwards;
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .container {
