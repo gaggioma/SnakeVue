@@ -23,7 +23,6 @@ Components:
 - multi player arena;
 - auto pilot sake with AI algorithm.
 
-
 ## Project setup
 ```
 yarn install
