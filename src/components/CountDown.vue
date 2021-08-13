@@ -1,7 +1,7 @@
 <template>
   <div :key="counter" class="containerCounter">
     <div class="counter">
-      <h1 >
+      <h1>
         {{ counter }}
       </h1>
     </div>
@@ -11,7 +11,7 @@
 <script>
 export default {
   created: function () {
-    setInterval(() => this.decreaseCounter(), 2000);
+    setInterval(() => this.decreaseCounter(), 1000);
   },
 
   data: () => {
@@ -37,14 +37,13 @@ export default {
   align-items: center;
   justify-content: center;
   position: fixed;
-  /*margin-left: 35%;
-  margin-top: 10%;*/
   z-index: 1;
   height: 100%;
   width: 100%;
+  background-color: black;
 }
 
-.counter{
+.counter {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -52,7 +51,7 @@ export default {
   height: 200px;
   background: darkturquoise;
   border-radius: 200px;
-  animation: fadeinout 2s linear forwards;
+  animation: fadeinout 1s linear forwards;
 }
 
 @keyframes fadeinout {

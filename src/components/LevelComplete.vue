@@ -1,16 +1,21 @@
 <template>
   <div class="levelComplete">
-      <div class="insideClassText">
-          👍 level complete in {{time}} ms!!
-      </div>
-   </div>
+    <div class="insideClassText">👍 level complete in {{ time }} ms!!</div>
+    <button class="buttonClass" @click="clickHandler($event)">Restart</button>
+  </div>
 </template>
 
 <script>
 export default {
-    props: [
-        "time"
-    ],
+  props: ["time"],
+
+  methods:{
+
+    clickHandler(){
+      this.$emit("restart");
+    }
+  }
+
 };
 </script>
 
@@ -21,30 +26,40 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: deepskyblue;
-  opacity: 0.7;
+  background-color: black;
   z-index: 1;
   height: 100%;
   width: 100%;
   text-shadow: 0 0 3px azure;
+  flex-direction: column;
 }
 
-.insideClassText{
-    animation: pulse 1s infinite;
-    transform: scale(1);
+.insideClassText {
+  color: white;
+  animation: pulse 1s infinite;
+  transform: scale(1);
 }
 
 @keyframes pulse {
-	0% {
-		transform: scale(0.90);
-	}
+  0% {
+    transform: scale(0.9);
+  }
 
-	70% {
-		transform: scale(1);
-	}
+  70% {
+    transform: scale(1);
+  }
 
-	100% {
-		transform: scale(0.90);
-	}
+  100% {
+    transform: scale(0.9);
+  }
 }
+
+.buttonClass{
+  margin-top: 5px;
+  border-radius: 10px;
+  height: 31px;
+  background-color: red;
+  color: white;
+}
+
 </style>

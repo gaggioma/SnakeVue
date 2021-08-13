@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <Arena></Arena>
+    <Arena
+    :key="keyVal"
+    @restartArena="restartApp()"></Arena>
   </div>
 </template>
 
@@ -13,6 +15,18 @@ export default {
   components: {
     Arena,
   },
+
+  data: function(){
+    return{
+      keyVal: Math.random()
+    }
+  },
+
+  methods:{
+    restartApp(){
+      this.keyVal = Math.random();
+    }
+  }
 };
 </script>
 
